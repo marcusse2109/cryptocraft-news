@@ -1,0 +1,26 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model CalendarEvent {
+  id        Int      @id @default(autoincrement())
+  eventDate DateTime
+  eventTime String?
+  country   String?
+  title     String
+  impact    String?
+  actual    String?
+  forecast  String?
+  previous  String?
+  sourceUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([title, eventDate])
+  @@index([eventDate])
+}
